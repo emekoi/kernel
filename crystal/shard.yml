@@ -1,0 +1,13 @@
+name: crystal
+version: 0.1.0
+
+authors:
+  - emekoi <emekankurumeh@outlook.com>
+
+targets:
+  crystal:
+    main: src/crystal.cr
+
+crystal: 0.24.2
+
+license: MIT
