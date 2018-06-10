@@ -1,3 +1,3 @@
-module Crystal
+module Kernel
   VERSION = "0.1.0"
 end

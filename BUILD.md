@@ -1,12 +1,11 @@
-# require
-- Nim => 0.18
-- qemu
-- i686-elf-gcc
-- nake
+# building
+you're going to need QEMU to run any of these so i suggest you download that.
 
-# build
+## tools
+you're also going to need some tools to build some of these. this is how you can get them.
+
+### i686-elf-gcc
 ```shell
-# cross-gcc
 export PREFIX="$HOME/opt/cross"
 export TARGET=i686-elf
 export PATH="$PREFIX/bin:$PATH"
@@ -36,7 +35,43 @@ make install-target-libgcc
 $HOME/opt/cross/bin/$TARGET-gcc --version
 
 export PATH="$HOME/opt/cross/bin:$PATH"
+```
 
-# kernel
+### nake
+have a working [nimble](https://github.com/nim-lang/nimble) installation and run `nimble install nake`.
+
+### xargo
+have a working [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) installation and run `cargo install xargo`.
+
+## c
+
+### required
+- nim >= 0.10.2
+- i686-elf-gcc
+- nake
+
+### build
+```shell
 nake run
 ```
+
+## nim
+
+### required
+- nim => 0.18.0
+- i686-elf-gcc
+- nake
+
+### build
+```shell
+nake run
+```
+
+## crystal
+### required
+### build
+
+## rust
+### required
+  - xargo
+### build

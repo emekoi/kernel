@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Crystal do
+describe Kernel do
   # TODO: Write tests
 
   it "works" do

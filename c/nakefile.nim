@@ -9,17 +9,18 @@ import os
 
 const
   CC = "i686-elf-gcc"
+  AS = "i686-elf-as"
 
 task "clean", "removes build files.":
-  removeDir("src/nimcache")
   removeDir("nimcache")
   removeDir("bin")
 
 task "build", "build the kernel.":
   runTask("clean")
   createDir "bin"
-  direShell "nim c -d:release src/main.nim"
-  direShell CC, " -T linker.ld -o bin/main.bin -ffreestanding -O2 -nostdlib src/nimcache/*.o"
+  direShell AS, r" src/boot.s -o bin/boot.o"
+  direShell CC, r" -T linker.ld -o bin/main.bin -ffreestanding -O2 -nostdlib -Wall -Wextra bin/*.o src/main.c"
+
 
 task "run", "run the kernel using QEMU.":
   if not existsFile("bin/main.bin"): runTask("build")

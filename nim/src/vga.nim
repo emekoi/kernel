@@ -1,3 +1,9 @@
+#  Copyright (c) 2018 emekoi
+#
+#  This library is free software; you can redistribute it and/or modify it
+#  under the terms of the MIT license. See LICENSE for details.
+#
+
 type
   Color* {.pure, size: 1.} = enum
     BLACK = 0,
@@ -14,7 +20,7 @@ type
     LIGHT_CYAN = 11,
     LIGHT_RED = 12,
     LIGHT_MAGENTA = 13,
-    LIGHT_BROWN = 14,
+    YELLOW = 14,
     WHITE = 15
 
 const
@@ -22,7 +28,7 @@ const
   HEIGHT* = 25
 
 var
-  terminalBuffer {.volatile.}: ptr UncheckedArray[uint16]
+  terminalBuffer {.volatile.}: ptr array[WIDTH * HEIGHT, uint16]
   terminalRow: range[0..(HEIGHT - 1)]
   terminalColumn: range[0..(WIDTH - 1)]
   terminalForeGround: Color
@@ -47,7 +53,7 @@ proc init*() =
   terminalForeGround = Color.LIGHT_GREY
   terminalBackGround = Color.DARK_GREY
   terminalColor = entryColor(terminalForeGround, terminalBackGround)
-  terminalBuffer = cast[ptr UncheckedArray[uint16]](0xB8000)
+  terminalBuffer = cast[ptr array[WIDTH * HEIGHT, uint16]](0xB8000)
   clear()
 
 proc setForeGround*(color: Color) =
@@ -102,7 +108,12 @@ proc putChar*(c: char) =
 proc write*(data: string) =
   var i = 0
   while i < data.len:
-    putChar(data[i])
+    let c = data[i]
+    if c == '\n':
+      terminalRow.inc
+      terminalColumn = 0
+    else:
+      putChar(c)
     inc i
 
 proc writeLine*(data: string) =
