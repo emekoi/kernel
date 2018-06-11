@@ -1,5 +1,5 @@
 switch("cc", "gcc")
-switch("lib", "src/rt")
+switch("lib", "src/runtime")
 switch("cpu", "i386")
 switch("boundChecks", "on")
 switch("noLinking")

@@ -4132,5 +4132,5 @@ when defined(cpp) and appType != "lib" and not defined(js) and
                  " [" & $ex.name & "]\n"
     quit 1
 
-## inlude patched libc
-include string_h
+## inlude nlibc
+include nlibc
