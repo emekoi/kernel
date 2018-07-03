@@ -5,7 +5,7 @@
 #
 
 {.push stack_trace: off, profiler:off.}
-import vga
+import kernel/vga
 
 proc rawoutput(s: string) =
   vga.writeLine s

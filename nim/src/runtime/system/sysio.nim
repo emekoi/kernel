@@ -4,9 +4,12 @@
 #  under the terms of the MIT license. See LICENSE for details.
 #
 
-{.push stack_trace: off, profiler:off, asmNoStackFrame.}
+import kernel/vga
 
-proc read*(port: uint16): uint8 {.exportc.} =
-  asm "inb `return`, `port`"
+{.push debugger: off.}
+
+proc echoBinSafe(args: openArray[string]) {.compilerProc.} =
+  for data in args:
+    data.write
 
 {.pop.}

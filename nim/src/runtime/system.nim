@@ -4132,5 +4132,5 @@ when defined(cpp) and appType != "lib" and not defined(js) and
                  " [" & $ex.name & "]\n"
     quit 1
 
-## inlude nlibc
 include nlibc
+include system/sysio

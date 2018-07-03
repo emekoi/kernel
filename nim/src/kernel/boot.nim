@@ -4,7 +4,7 @@
 #  under the terms of the MIT license. See LICENSE for details.
 #
 
-{.push stack_trace: off, profiler:off, asmNoStackFrame.}
+{.push stackTrace: off, profiler: off, asmNoStackFrame.}
 
 proc kernel_start() {.exportc.} =
 
