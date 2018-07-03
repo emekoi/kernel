@@ -15,9 +15,12 @@ task "clean", "removes build files.":
   removeDir("nimcache")
   removeDir("bin")
 
-task "build", "build the kernel.":
-  runTask("clean")
+task "setup", "creates build directories.":
+  runTask "clean"
   createDir "bin"
+
+task "build", "build the kernel.":
+  runTask "setup"
   direShell "nim c -d:release src/main.nim"
   direShell CC, " -T linker.ld -o bin/main.bin -ffreestanding -O2 -nostdlib src/nimcache/*.o"
 

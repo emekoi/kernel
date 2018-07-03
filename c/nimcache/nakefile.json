@@ -1,0 +1,31 @@
+{"compile":[
+["/Users/patiencenkurumeh/Other/kernel/c/nimcache/nakefile.c", "clang -c  -w  -I/Users/patiencenkurumeh/.choosenim/toolchains/nim-0.18.0/lib -o /Users/patiencenkurumeh/Other/kernel/c/nimcache/nakefile.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/nakefile.c"]
+],
+"link":[
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/linenoise.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/nakefile.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_system.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/nake_nake.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_strutils.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_parseopt2.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_tables.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_os.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_rdstdin.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_times.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/nake_nakelib.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_parseutils.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_math.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_algorithm.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_posix.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_ospaths.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_hashes.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_linenoise.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_termios.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_osproc.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_strtabs.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_streams.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_cpuinfo.o",
+"/Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_kqueue.o"
+],
+"linkcmd": "clang   -o /Users/patiencenkurumeh/Other/kernel/c/nakefile  /Users/patiencenkurumeh/Other/kernel/c/nimcache/linenoise.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/nakefile.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_system.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/nake_nake.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_strutils.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_parseopt2.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_tables.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_os.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_rdstdin.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_times.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/nake_nakelib.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_parseutils.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_math.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_algorithm.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_posix.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_ospaths.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_hashes.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_linenoise.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_termios.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_osproc.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_strtabs.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_streams.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_cpuinfo.o /Users/patiencenkurumeh/Other/kernel/c/nimcache/stdlib_kqueue.o  -lm   -ldl"
+}

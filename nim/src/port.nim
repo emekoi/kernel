@@ -4,4 +4,9 @@
 #  under the terms of the MIT license. See LICENSE for details.
 #
 
-include nlibc/string_h
+{.push stack_trace: off, profiler:off, asmNoStackFrame.}
+
+proc read*(port: uint16): uint8 {.exportc.} =
+  asm "inb `return`, `port`"
+
+{.pop.}

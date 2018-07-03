@@ -1,12 +1,17 @@
 switch("cc", "gcc")
-switch("lib", "src/runtime")
 switch("cpu", "i386")
-switch("boundChecks", "on")
-switch("noLinking")
-switch("os", "standalone")
-switch("gc", "none")
-switch("deadCodeElim", "on")
+
 switch("noMain")
-switch("i386.standalone.gcc.exe", "i686-elf-gcc")
-switch("i386.standalone.gcc.linkerexe", "i686-elf-ld")
-switch("passC", "-m32 -std=gnu99 -ffreestanding -O2 -Wall -Wextra")
+switch("noLinking")
+
+switch("gc", "none")
+switch("os", "standalone")
+switch("boundChecks", "on")
+switch("deadCodeElim", "on")
+
+switch("gcc.exe", "i686-elf-gcc")
+switch("lib", "src/runtime")
+switch("cincludes", "runtime/include")
+
+switch("passL", "linker.ld")
+switch("passC", "-m32 -std=gnu99 -ffreestanding -nostdlib -O2 -Wall -Wextra")
