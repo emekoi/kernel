@@ -120,3 +120,5 @@ proc writeLine*(data: string) =
   write(data)
   terminalRow.inc
   terminalColumn = 0
+
+init()

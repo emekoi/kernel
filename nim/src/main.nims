@@ -1,3 +1,5 @@
+switch("path", ".")
+
 switch("cc", "gcc")
 switch("cpu", "i386")
 

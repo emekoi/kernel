@@ -24,6 +24,11 @@ task "build", "build the kernel.":
   direShell "nim c -d:release src/main.nim"
   direShell CC, " -T linker.ld -o bin/main.bin -ffreestanding -O2 -nostdlib src/nimcache/*.o"
 
+task "buildv", "build the kernel in verbose mode.":
+  runTask "setup"
+  direShell "nim c -d:release --verbosity:3 src/main.nim"
+  direShell CC, " -T linker.ld -o bin/main.bin -ffreestanding -O2 -nostdlib src/nimcache/*.o"
+
 task "run", "run the kernel using QEMU.":
   if not existsFile("bin/main.bin"): runTask("build")
   direShell "qemu-system-i386 -kernel bin/main.bin"

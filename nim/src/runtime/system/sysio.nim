@@ -10,6 +10,6 @@ import kernel/vga
 
 proc echoBinSafe(args: openArray[string]) {.compilerProc.} =
   for data in args:
-    data.write
+    vga.write(data)
 
 {.pop.}

@@ -10,13 +10,7 @@ import kernel/[
   vga
 ]
 
-type ok = object
-  u: int
-
 proc main() {.exportc.} =
-  vga.init()
-  writeLine("this is a test")
-  writeLine("of a kernel in nim")
-  # let s = "ss"
-  echo "s"
-  let g = ok(u: 3)
+  # vga.init()
+  echo "this is a test\n"
+  echo "of a kernel in nim"
