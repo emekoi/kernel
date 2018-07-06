@@ -3,3 +3,6 @@
 * [little os book](http://littleosbook.github.io/)
 * [ps/2 keyboard](https://wiki.osdev.org/PS/2_Keyboard)
 * [the keyboard](http://www.osdever.net/bkerndev/Docs/keyboard.htm)
+* [kernel development tutorials](http://www.jamesmolloy.co.uk/tutorial_html/4.-The%20GDT%20and%20IDT.html)
+* [x86 instruction listing](https://c9x.me/x86/)
+* [aenix](https://github.com/littleosbook/aenix)
