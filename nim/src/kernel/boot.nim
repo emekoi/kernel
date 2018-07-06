@@ -4,9 +4,14 @@
 #  under the terms of the MIT license. See LICENSE for details.
 #
 
-{.push stackTrace: off, profiler: off, asmNoStackFrame.}
+import dt
 
-proc kernel_start() {.exportc.} =
+{.push exportc, stackTrace: off, profiler: off, asmNoStackFrame.}
+
+proc kernel_setup() =
+  dt.init()
+
+proc kernel_start() =
 
   # Declare constants for the multiboot header.
   asm ".set ALIGN,    1 << 0"           # align loaded modules on page boundaries
@@ -78,6 +83,8 @@ proc kernel_start() {.exportc.} =
   # yet. The GDT should be loaded here. Paging should be enabled here.
   # C++ features such as global constructors and exceptions will require
   # runtime support to work as well.
+
+  asm "  call kernel_setup"
 
   # Enter the high-level kernel. The ABI requires the stack is 16-byte
   # aligned at the time of the call instruction (which afterwards pushes

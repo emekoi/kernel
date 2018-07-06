@@ -4,13 +4,15 @@
 #  under the terms of the MIT license. See LICENSE for details.
 #
 
-import kernel/[
-  boot,
-  port,
-  vga
-]
+import kernel/boot
+import kernel/driver/vga
 
-proc main() {.exportc.} =
-  # vga.init()
-  echo "this is a test\n"
-  echo "of a kernel in nim"
+proc main() =
+  # echo "this is a test"
+  # echo "of a kernel in nim"
+  for c in 'a' .. 'y':
+    putChar c
+    putchar '\n'
+  putChar 'z'
+
+main()

@@ -4,8 +4,16 @@
 #  under the terms of the MIT license. See LICENSE for details.
 #
 
+{.push stackTrace: off, profiler: off.}
+
+import port
+
 type
-  Color* {.pure, size: 1.} = enum
+  VGACommand {.pure.} = enum
+    HI = 0xE
+    LO = 0xF
+
+  Color* {.pure, size: sizeof(uint8).} = enum
     BLACK = 0,
     BLUE = 1,
     GREEN = 2,
@@ -26,11 +34,12 @@ type
 const
   WIDTH* = 80
   HEIGHT* = 25
+  ESCAPES = { '\b', '\n', '\r', '\t' }
 
 var
   terminalBuffer {.volatile.}: ptr array[WIDTH * HEIGHT, uint16]
-  terminalRow: range[0..(HEIGHT - 1)]
-  terminalColumn: range[0..(WIDTH - 1)]
+  terminalRow: range[0 .. (HEIGHT - 1)]
+  terminalColumn: range[0 .. (WIDTH - 1)]
   terminalForeGround: Color
   terminalBackGround: Color
   terminalColor: uint8
@@ -41,11 +50,19 @@ proc entryColor(fg, bg: Color): uint8 =
 proc entry(uc: char, color: uint8): uint16 =
   return uc.uint16 or (color.uint16 shl 8)
 
+proc moveCursor(x, y: int) =
+  let pos = uint16(y * WIDTH + x)
+  Port.VGA_COMMAND.write(Command(VGACommand.HI))
+  Port.VGA_DATA.write(Command((pos shr 8) and 0x00FF))
+  Port.VGA_COMMAND.write(Command(VGACommand.LO))
+  Port.VGA_DATA.write(Command(pos and 0x00FF))
+
+proc updateCursor() =
+  moveCursor(terminalColumn, terminalRow)
+
 proc clear*() =
-  var idx = 0
-  while idx < HEIGHT * WIDTH:
-    terminalBuffer[idx] = entry(' ', terminalColor)
-    inc idx
+  for i in 0 .. (HEIGHT * WIDTH - 1):
+    terminalBuffer[i] = entry(' ', terminalColor)
 
 proc init*() =
   terminalRow = 0
@@ -69,11 +86,13 @@ proc setColor*(fg, bg: Color) =
   terminalBackGround = bg
   terminalColor = entryColor(terminalForeGround, terminalBackGround)
 
-proc setRow*(row: range[0..(HEIGHT - 1)]) =
+proc setRow*(row: range[0 .. (HEIGHT - 1)]) =
   terminalRow = row
+  updateCursor()
 
-proc setColumn*(col: range[0..(WIDTH - 1)]) =
+proc setColumn*(col: range[0 .. (WIDTH - 1)]) =
   terminalColumn = col
+  updateCursor()
 
 proc getForeGround*(): Color =
   terminalForeGround
@@ -87,34 +106,58 @@ proc getColor*(): (Color, Color) =
     terminalBackGround
   )
 
-proc getRow*(): range[0..(HEIGHT - 1)] =
+proc getRow*(): range[0 .. (HEIGHT - 1)] =
   terminalRow
 
-proc getColumn*(): range[0..(WIDTH - 1)] =
+proc getColumn*(): range[0 .. (WIDTH - 1)] =
   terminalColumn
 
 proc putEntryAt(c: char, x, y: int) =
-  let idx = y * WIDTH + x
-  terminalBuffer[idx] = entry(c, terminalColor)
+  terminalBuffer[y * WIDTH + x] = entry(c, terminalColor)
 
-proc putChar*(c: char) =
-  putEntryAt(c, terminalColumn, terminalRow)
-  terminalColumn.inc
-  if terminalColumn == WIDTH:
-    terminalColumn = 0
-    if terminalRow == HEIGHT:
-      terminalRow = 0
-
-proc write*(data: string) =
-  var i = 0
-  while i < data.len:
-    let c = data[i]
-    if c == '\n':
+proc handleEscape(c: char) =
+  case c:
+    of '\b':
+      terminalColumn.dec
+    of '\n':
       terminalRow.inc
       terminalColumn = 0
+    of '\r':
+      terminalColumn = 0
+    of '\t':
+      terminalColumn.inc 4
     else:
-      putChar(c)
-    inc i
+      discard
+
+proc putChar*(c: char) =
+  if c in ESCAPES:
+    handleEscape(c)
+  else:
+    putEntryAt(c, terminalColumn, terminalRow)
+    terminalColumn.inc
+
+  if terminalColumn >= WIDTH:
+    terminalColumn = 0
+    terminalRow.inc
+
+  if terminalRow >= HEIGHT:
+    let
+      blank = entry(' ', terminalColor)
+      line = (HEIGHT - 1) * WIDTH
+
+    for i in 0 .. (line - 1):
+      terminalBuffer[i] = terminalBuffer[i + 80]
+
+    for i in line .. (HEIGHT * WIDTH - 1):
+      terminalBuffer[i] = blank
+
+    terminalRow = HEIGHT - 1
+
+  updateCursor()
+
+proc write*(data: string) =
+  for c in cstring(data):
+    putChar(c)
 
 proc writeLine*(data: string) =
   write(data)
@@ -122,3 +165,5 @@ proc writeLine*(data: string) =
   terminalColumn = 0
 
 init()
+
+{.pop.}

@@ -5,7 +5,7 @@
 #
 
 {.push stack_trace: off, profiler:off.}
-import kernel/vga
+import kernel/driver/vga
 
 proc rawoutput(s: string) =
   vga.writeLine s
@@ -19,14 +19,12 @@ proc panic(s: string) =
   vga.setRow(vga.HEIGHT - 1)
   vga.setColumn(0)
   vga.setColor(Color.RED, Color.WHITE)
-  vga.clear()
+  # vga.clear()
 
   rawoutput s
 
   vga.setRow(row)
   vga.setColumn(col)
   vga.setColor(fg, bg)
-
-proc copyString() {.exportc.} = discard
 
 {.pop.}

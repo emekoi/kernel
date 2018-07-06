@@ -7,10 +7,11 @@
 #ifndef _STDDEF_H_
 #define _STDDEF_H_ 1
 
-#define NULL ((void *)0)
+#define NULL ((void *) 0)
 
 typedef unsigned long size_t;
-typedef long ssize_t;
-typedef long intptr_t;
+typedef long          ssize_t;
+typedef long          intptr_t;
+typedef typeof (((int *)0) - ((int *)0)) ptrdiff_t;
 
 #endif

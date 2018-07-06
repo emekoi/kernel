@@ -3,7 +3,7 @@ switch("path", ".")
 switch("cc", "gcc")
 switch("cpu", "i386")
 
-switch("noMain")
+# switch("noMain")
 switch("noLinking")
 
 switch("gc", "none")
@@ -16,4 +16,4 @@ switch("lib", "src/runtime")
 switch("cincludes", "runtime/include")
 
 switch("passL", "linker.ld")
-switch("passC", "-m32 -std=gnu99 -ffreestanding -nostdlib -O2 -Wall -Wextra")
+switch("passC", "-m32 -std=gnu99 -ffreestanding -fno-stack-protector -nostdlib -O2 -Wall -Wextra")

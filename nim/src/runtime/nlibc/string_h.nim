@@ -5,7 +5,7 @@
 #
 
 when defined(standalone):
-  {.push exportc, cdecl.}
+  {.push exportc, cdecl, stackTrace: off, profiler: off.}
 
 proc strlen*(str: cstring): csize =
   var i = 0

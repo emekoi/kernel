@@ -1,0 +1,5 @@
+* [going further on x86](https://wiki.osdev.org/Going_Further_on_x86)
+* [kenel 201 (keyboatd input)](https://arjunsreedharan.org/post/99370248137/kernel-201-lets-write-a-kernel-with-keyboard)
+* [little os book](http://littleosbook.github.io/)
+* [ps/2 keyboard](https://wiki.osdev.org/PS/2_Keyboard)
+* [the keyboard](http://www.osdever.net/bkerndev/Docs/keyboard.htm)

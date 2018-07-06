@@ -4,13 +4,11 @@
 #  under the terms of the MIT license. See LICENSE for details.
 #
 
-import kernel/driver/vga
+{.push stackTrace: off, profiler: off.}
 
-{.push debugger: off.}
+import dt/global
 
-proc echoBinSafe(args: openArray[string]) {.compilerProc.} =
-  for data in args:
-    vga.write(data)
-  vga.write("\n")
+proc init*() =
+  global.init()
 
 {.pop.}

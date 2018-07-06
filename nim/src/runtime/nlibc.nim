@@ -4,4 +4,5 @@
 #  under the terms of the MIT license. See LICENSE for details.
 #
 
+include nlibc/stdlib_h
 include nlibc/string_h
