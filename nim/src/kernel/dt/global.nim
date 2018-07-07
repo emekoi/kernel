@@ -27,13 +27,13 @@ proc flush(gdt: uint32) {.asmNoStackFrame.} =
   asm """lgdt %0
     :"=r"(`gdt`)
   """
-  asm "mov ax, 0x10"      # 0x10 is the offset in the GDT to our data segment
-  asm "mov ds, ax"        # Load all data segment selectors
-  asm "mov es, ax"
-  asm "mov fs, ax"
-  asm "mov gs, ax"
-  asm "mov ss, ax"
-  asm "jmp 0x08:flush_cs" # 0x08 is the offset to our code segment: Far jump!
+  asm "mov 0x10, %ax"       # 0x10 is the offset in the GDT to our data segment
+  asm "mov %ds, %ax"        # Load all data segment selectors
+  asm "mov %es, %ax"
+  asm "mov %fs, %ax"
+  asm "mov %gs, %ax"
+  asm "mov %ss, %ax"
+  asm "jmp $0x08, $flush_cs" # 0x08 is the offset to our code segment: Far jump!
   asm "flush_cs:"
   asm "  ret"
 
